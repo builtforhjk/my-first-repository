@@ -1,9 +1,8 @@
-#include <iostream>
-#include <cstdio>
-using namespace std;
+#include <stdio.h>
 int pre[10001];
 void t_init(){
-  for(int i = 0; i < 10001; ++i) pre[i] = i;
+  int i = 0;
+  for(; i < 10001; ++i) pre[i] = i;
 }
 int t_find(int x){
   int r = x;
@@ -25,11 +24,13 @@ int main(){
   scanf("%d",&n);
   t_init();
   int num = 0;
-  for(int i = 1; i <= n; ++i){
+  int i;
+  for(i = 1; i <= n; ++i){
     int m;
     scanf("%d",&m);
     int root;
-    for(int j = 0; j < m; ++j){
+    int j;
+    for(j = 0; j < m; ++j){
       int t;
       scanf("%d",&t);
       if(t > num) num = t;
@@ -38,13 +39,13 @@ int main(){
     }
   }
   int tree = 0;
-  for(int i = 1; i <= num; ++i){
+  for(i = 1; i <= num; ++i){
     if(pre[i] == i) ++tree;
   }
   printf("%d %d\n",tree,num);
   int query;
   scanf("%d",&query);
-  for(int i = 0; i < query; ++i){
+  for(i = 0; i < query; ++i){
     int b1,b2;
     scanf("%d %d",&b1,&b2);
     if(t_find(b1) == t_find(b2)) printf("Yes\n");

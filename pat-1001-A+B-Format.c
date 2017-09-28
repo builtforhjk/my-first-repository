@@ -21,7 +21,8 @@ int main(){
     c = c/1000;
   }
   printf(sign?"-":"");
-  for(int i = count-1; i >= 0; --i){
+  int i = count-1;
+  for(; i >= 0; --i){
     if(i==count-1) printf("%d",clip[i]);
     else printf("%03d",clip[i]);
     printf(i==0?"\n":",");

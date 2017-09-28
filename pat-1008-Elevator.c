@@ -14,7 +14,8 @@ int main(){
     scanf("%d",&N);
     list[0]=0;
     total=0;
-    for(int i = 1; i <= N; ++i){
+    int i = 1;
+    for(; i <= N; ++i){
         scanf("%d",list+i);
     }
     printf("%d\n",calDuration(1));

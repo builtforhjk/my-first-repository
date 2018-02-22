@@ -92,3 +92,86 @@ int main(){
     cout<<graph[endCity].pathNumber<<" "<<rescue[endCity]<<endl;
     return 0;
 }
+/*
+#include <iostream>
+#include <cstdio>
+#include <map>
+#include <vector>
+using namespace std;
+typedef struct Edge{
+  int rear;
+  int weigh;
+  Edge(){}
+  Edge(int x, int y):rear(x),weigh(y){}
+}Edge;
+typedef struct Node{
+  int val;
+  bool visited;
+  int dist;
+  int count;
+  int total;
+  Node(){
+    this->val = 0;
+    this->visited = false;
+    this->dist = 999999;
+    this->count = 0;
+    this->total = 0;
+  }
+}Node;
+map<int, vector<Edge> >graph;
+Node * vetex;
+void dijkstra(int n_start, int n_end, int n){
+  if(n_start == n_end) return;
+  for(auto &v : graph[n_start]){
+    if(!(vetex[v.rear].visited)){
+      int val_tmp = vetex[n_start].dist + v.weigh;
+      if(val_tmp < vetex[v.rear].dist){
+        vetex[v.rear].dist = val_tmp;
+        vetex[v.rear].total = vetex[n_start].total + vetex[v.rear].val;
+        vetex[v.rear].count = vetex[n_start].count;
+      }
+      else if(val_tmp == vetex[v.rear].dist){
+        vetex[v.rear].count += vetex[n_start].count;
+        int amount = vetex[n_start].total + vetex[v.rear].val;
+        if(amount > vetex[v.rear].total) vetex[v.rear].total = amount;  
+      }
+    }
+  }
+  int pivot = 999999;
+  int next = -1;
+  for(int i = 0; i < n; ++i){
+    if(!(vetex[i].visited)){
+      if(vetex[i].dist < pivot){
+        pivot = vetex[i].dist;
+        next = i;
+      }
+    }
+  }
+  vetex[next].visited = true;
+  dijkstra(next, n_end, n);
+}
+int main(){
+  int n,m,n_start,n_end;
+  scanf("%d%d%d%d",&n,&m,&n_start,&n_end);
+  vetex = new Node[n+1];
+  for(int i = 0; i < n; ++i){
+    scanf("%d",&(vetex[i].val));
+  }
+  for(int i = 0; i < m; ++i){
+    int h, t, weigh;
+    scanf("%d%d%d",&h,&t,&weigh);
+    Edge tmp;
+    tmp.weigh = weigh;
+    tmp.rear = t;
+    graph[h].push_back(Edge(t,weigh));
+    graph[t].push_back(Edge(h,weigh));
+  }
+  vetex[n_start].visited = true;
+  vetex[n_start].dist = 0;
+  vetex[n_start].count = 1;
+  vetex[n_start].total = vetex[n_start].val;
+  dijkstra(n_start, n_end, n);
+  printf("%d %d\n",vetex[n_end].count, vetex[n_end].total);
+  return 0;
+}
+*/

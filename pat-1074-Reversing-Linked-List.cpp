@@ -64,3 +64,66 @@ int main(){
     }
     return 0;
 }
+/*
+#include <iostream>
+#include <cstdio>
+#include <map>
+using namespace std;
+typedef struct Node{
+  int val;
+  int next;
+  Node(){}
+  Node(int x, int y):val(x),next(y){}
+}Node;
+map<int, Node>linkedlist;
+int main(){
+  int root, n,k;
+  scanf("%d%d%d",&root,&n,&k);
+  for(int i = 0; i < n; ++i){
+    int addr, data, next;
+    scanf("%d%d%d",&addr, &data, &next);
+    linkedlist[addr] = Node(data, next);
+  }
+  int total = 0, cur = root;
+  while(cur != -1){
+    ++total;
+    cur = linkedlist[cur].next;
+  }
+  int pos = 1;
+  cur = root;
+  int mark = root, head = cur, pre = cur;
+  bool sign = false;
+  while(pos+k-1 <= total){
+  	cur = linkedlist[cur].next;
+    for(int i = 1; i < k; ++i){
+      int tmp = linkedlist[cur].next;
+      linkedlist[cur].next = head;
+      linkedlist[pre].next = tmp;
+      head = cur;
+      cur = tmp;
+    }
+    if(!sign){
+    	root = head;
+    	sign = true;
+    }
+    else {
+      linkedlist[mark].next = head;
+      mark = pre;
+    }
+    head = cur;
+    pre = cur;
+    pos += k;
+  }
+  cur = root;
+  while(1){
+    printf("%05d %d ", cur, linkedlist[cur].val);
+    cur = linkedlist[cur].next;
+    if(cur == -1){
+      printf("-1\n");
+      break;
+    }
+    else printf("%05d\n",cur);
+  }
+  return 0;
+}
+*/

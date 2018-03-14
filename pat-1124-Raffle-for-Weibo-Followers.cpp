@@ -1,23 +1,30 @@
 #include <iostream>
 #include <cstdio>
-#include <algorithm>
+#include <map>
 #include <vector>
 using namespace std;
 int main(){
-  int n;
-  scanf("%d",&n);
-  vector<double> rope;
-  for(int i = 0; i < n; ++i){
-    int tmp;
-    scanf("%d",&tmp);
-    rope.push_back(tmp);
+  map <string, bool> visited;
+  vector<string> follower;
+  int m,n,s;
+  scanf("%d%d%d",&m,&n,&s);
+  bool exchanged = false;
+  for(int i = 0; i < m; ++i){
+    char str[22];
+    scanf("%s",str);
+    string tmp(str);
+    visited[tmp] = false;
+    follower.push_back(tmp);
   }
-  sort(rope.begin(), rope.end());
-  double res = rope[0];
-  for(int i = 1; i < n; ++i){
-    res = res/2;
-    res += rope[i]/2;
+  for(int i = s; i <= m;){
+    if(!visited[follower[i-1]]){
+      exchanged = true;
+      printf("%s\n",follower[i-1].c_str());
+      visited[follower[i-1]] = true;
+      i += n;
+    }
+    else ++i;
   }
-  printf("%d\n",(int)res);
+  if(!exchanged) printf("Keep going...\n");
   return 0;
 }
